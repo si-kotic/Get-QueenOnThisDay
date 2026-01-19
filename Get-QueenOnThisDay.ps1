@@ -25,9 +25,13 @@ Function Get-QueenOnThisDay {
     }
     if ($All) {
         Write-Host $queenLogo
-        $factObj | Format-Table When,What
+        $factObj | Format-Table When,What -Wrap
     } else {
-        $curFact = Get-Random $factObj
+        if ($factObj.count -eq 1) {
+            $curFact = $factObj
+        } else {
+            $curFact = Get-Random $factObj
+        }
         Write-Host $queenLogo
         Write-Host
         Write-Host "$($curFact.When), $($curFact.What)"
